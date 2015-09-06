@@ -1,0 +1,10 @@
+a:link {color: blue; text-decoration:none; }
+a:hover {color: blue; text-decoration:none; }
+a:visited {color: blue; text-decoration:none; }
+
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}
