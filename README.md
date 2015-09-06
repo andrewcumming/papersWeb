@@ -9,6 +9,7 @@ The filenames should have the format
 The following lines create an alias 'papers' that will open a Safari window with the list of papers:
 
 `export PAPERSWEB='/Users/cumming/Dropbox/papersWeb'`
+
 `alias papers='python $PAPERSWEB/papersWeb.py > $PAPERSWEB/papersWeb.html; open -a Safari $PAPERSWEB/papersWeb.html'`
 
 This code uses the `sorttables.js` javascript library from 
