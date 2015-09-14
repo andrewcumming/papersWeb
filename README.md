@@ -14,3 +14,7 @@ The following lines create an alias 'papers' that will open a Safari window with
 
 This code uses the `sorttables.js` javascript library from 
 `http://www.kryogenix.org/code/browser/sorttable/`
+
+and `pdftotext` from
+`http://www.foolabs.com/xpdf/home.html`
+to extract DOI's from PDF files
