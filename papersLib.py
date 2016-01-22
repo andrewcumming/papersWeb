@@ -34,15 +34,22 @@ def getDOI(filename):
 	return doiString,doiLabel
 
 def getPaperInfo(filename):
-	author, year, title = filename[:-4].split('_')[:3]
+	fields = filename[:-4].split('_')
+	if len(fields) == 4:
+		author, author2, year, title = fields[:4]
+	else:
+		author, year, title = fields[:3]
+		author2 = ''
 	fullFilename = papersDirectory+filename
+	size = os.path.getsize(fullFilename)
 	date = datetime.datetime.fromtimestamp(os.path.getmtime(fullFilename))
 	doiString, doiLabel = getDOI(fullFilename)
 	if includeTags: 
 		tag = getTags(fullFilename)
 	else:
 		tag = ''
-	return (author, year, title, fullFilename,  
-			str(date), os.path.getsize(fullFilename), tag,
+	fullFilename = '../Papers/'+filename
+	return (author, author2, year, title, fullFilename,  
+			str(date), size, tag,
 			doiString, doiLabel)
 			

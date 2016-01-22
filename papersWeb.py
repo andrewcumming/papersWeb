@@ -11,35 +11,69 @@ filenames = [name for name in os.listdir(papersDirectory) if '.pdf' in name]
 pool = Pool(processes=8)
 papers = pool.map(getPaperInfo,filenames)
 os.system('rm tmp*.txt')
-				
+stop = time.time()
+			
 # page header
 print('''<HTML>
   <HEAD>
   	<TITLE>Papers</TITLE>
     <LINK href="papersWeb.css" rel="stylesheet" type="text/css">
-<script src="sorttable.js"></script>
 </head>
 <body>''')
 
+#<script src="sorttable.js"></script>
+
+
+
+print('<div id="papers">')
+
 # links at the top of the table
-print('| <a href="http://adsabs.harvard.edu/abstract_service.html" target="_blank">ADS</a> ')
-print('| <a href="file://'+papersDirectory+'.DS_Store">Finder</a> ')
-print('|')	
+print('<div class="links">')
+print('<a href="http://adsabs.harvard.edu/abstract_service.html" target="_blank">ADS</a> | ')
+print('<a href="file://'+papersDirectory+'.DS_Store">Finder</a>')
+
+print('</div>')
+	
+print('''<input class="search" placeholder="Search" />
+  <button class="sort" data-sort="author">
+  	Author
+  	</button>
+  <button class="sort" data-sort="year">
+    Year
+  </button>
+    <button class="sort" data-sort="date">
+  	Date added
+  	</button>
+  ''')
 		
 # table header row
-print('<table style="width:100\%" class="sortable"')
-print('<tr><th style="width:8em">Author</th><th style="width:4em">Year</th><th>Title</th><th>Date added</th>')
-if includeTags:
-	print('<th>Tags</th>')
-print('</tr>')
+print('<table>') # style="width:100\%" class="sortable">')
+
+#print('<thead>')
+#print('<tr><th style="width:8em">Author</th><th style="width:4em">Year</th><th>Title</th><th>Date added</th>')
+#if includeTags:
+#	print('<th>Tags</th>')
+#print('</tr>')
+#print('</thead>')
+
+
+print('<tbody class="list">')
+
+
 
 totalSize = 0.0
-for author,year,title,filename,date,size,tag,doiString,doiLabel in papers:
+for author,author2,year,title,filename,date,size,tag,doiString,doiLabel in papers:
 	print("<tr>")
-	print("<td>"+author+"</td>")
-	print("<td>"+year+"</td>")
-	print('<td><a href="'+filename+'" target="_blank">'+title+'</a></td>')	
-	print("<td>"+date+"</td>")
+	print('<td class="author">'+author)
+	if author2 != '':
+		print("& "+author2)
+	print("</td>")
+	
+	print('<td class="year">'+year+'</td>')
+	if len(title) > 50:
+		title = title[:47]+'...'
+	print('<td class="title"><a href="'+filename+'" target="_blank">'+title+'</a></td>')	
+	print('<td class="date">'+date+"</td>")
 	totalSize += size
 	if includeTags:
 		print('<td>')
@@ -58,10 +92,12 @@ for author,year,title,filename,date,size,tag,doiString,doiLabel in papers:
 	
 	print('</tr>')	
 
-print('</table>')
+print('''</tbody></table></div>
+<script src="list.js"></script>
+<script src="papersWeb.js"></script>''')
 
-stop = time.time()
 print('<br><small>Stats: %d papers %.3g MB %.3g s</small>' % (len(papers),totalSize/1e6,(stop-start)))
+
 
 print('''
 </body>

@@ -12,9 +12,8 @@ The following lines create an alias 'papers' that will open a Safari window with
 
 `alias papers='python $PAPERSWEB/papersWeb.py > $PAPERSWEB/papersWeb.html; open -a Safari $PAPERSWEB/papersWeb.html'`
 
-This code uses the `sorttables.js` javascript library from 
-`http://www.kryogenix.org/code/browser/sorttable/`
+Uses `list.js` from
+`http://www.listjs.com`
 
-and `pdftotext` from
+Extracts DOI's from PDF files using `pdftotext` from
 `http://www.foolabs.com/xpdf/home.html`
-to extract DOI's from PDF files
