@@ -1,7 +1,22 @@
-
 body {
- #font-family:sans-serif;
-}
+    background-color: white;
+    color: black;
+    #font-family:sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #121212;
+      color: #eaeaea;
+      a:link {
+      color: #6cb6ff;
+      }
+      a:visited {
+      color: #c792ea;
+      }
+    }
+  }
+  
 td {
   padding:2px; 
  # border:solid 1px #eee;
