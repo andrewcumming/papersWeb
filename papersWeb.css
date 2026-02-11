@@ -48,6 +48,7 @@ input:focus {
   color:#fff;
   text-decoration: none;
   #background-color: #28a8e0;
+  background-color: #BBBBBB;
   height:28px;
 }
 .sort:hover {
